@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Travel App</string>
+    <string name="add_landmark">Add a landmark</string>
+    <string name="btn_add_landmark">+</string>
+    <string name="plus">+</string>
+    <string name="add_city">Add a new city</string>
+    <string name="add_city_description">Add a city description</string>
+    <string name="confirm_landmark">Confirm the landmark</string>
+    <string name="landmark_description">Landmark description</string>
+    <string name="add_landmark_name">Add a landmark name</string>
+    <string name="add_landmark_description">Add a landmark description</string>
+    <string name="submit_text">Submit</string>
+    <string name="city_landmarks">Landmarks</string>
+</resources>
