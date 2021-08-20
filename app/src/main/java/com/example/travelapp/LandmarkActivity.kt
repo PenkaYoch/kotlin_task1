@@ -2,7 +2,6 @@ package com.example.travelapp
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_landmark.*
 import kotlinx.android.synthetic.main.dialog_landmark.*
-import kotlinx.android.synthetic.main.item_landmark.*
 
 //import kotlinx.android.synthetic.main.landmark.*
 
@@ -23,14 +21,12 @@ class LandmarkActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_landmark)
+        setContentView(R.layout.activity_landmark)
         landmarkAdapter = LandmarkAdapter(mutableListOf(), this)
         rvLandmarks.adapter = landmarkAdapter
         rvLandmarks.layoutManager = LinearLayoutManager(this)
 
         val context = this
-
-//        val message = intent.getStringExtra("cityId")
 
         btnAddLandmark.setOnClickListener {
                 val dialog = Dialog(context)

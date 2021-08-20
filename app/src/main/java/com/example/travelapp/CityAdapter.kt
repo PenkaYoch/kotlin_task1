@@ -42,7 +42,7 @@ class CityAdapter(
 
     fun addCity(city: City) {
         cities.add(city)
-        city.cityId = cities.size + 1
+        city.cityId = cities.lastIndex + 1
         Log.e("tag", "newCity $cities")
         notifyItemInserted(cities.size - 1)
 //        notifyDataSetChanged()

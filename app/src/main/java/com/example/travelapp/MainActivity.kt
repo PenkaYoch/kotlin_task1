@@ -15,10 +15,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var cityAdapter: CityAdapter
 
+    private fun getItemsList(): ArrayList<City> {
+        val dataBaseHandler: DataBaseHandler = DataBaseHandler(this)
+
+        return dataBaseHandler.viewData()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        cityAdapter = CityAdapter(mutableListOf(), this)
+
+        cityAdapter = CityAdapter(getItemsList(), this)
 
         rvCities.adapter = cityAdapter
         rvCities.layoutManager = LinearLayoutManager(this)
@@ -28,14 +35,6 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         val context = this
-
-        var cityCounter: Int = 555555
-
-        fun getItemsList(): ArrayList<City> {
-            val dataBaseHandler: DataBaseHandler = DataBaseHandler(this)
-
-            return dataBaseHandler.viewData()
-        }
 
         fun setupListOfDataIntoRecyclerView() {
             if (getItemsList().size > 0) {
@@ -48,9 +47,8 @@ class MainActivity : AppCompatActivity() {
         btnAddCity.setOnClickListener {
             val cityTitle = etCityName.text.toString()
             val cityDescription = etCityDescription.text.toString()
-            val city = City(cityAdapter.cities.size, cityTitle, cityDescription)
+            val city = City(cityAdapter.cities.lastIndex + 1, cityTitle, cityDescription)
             val alertDialogBuilder = AlertDialog.Builder(this)
-            cityCounter++
             val dataBaseHandler: DataBaseHandler = DataBaseHandler(this)
 
             if (cityTitle.isNotEmpty() && !cityAdapter.cities.contains(city) && cityDescription.isNotEmpty()) {
@@ -58,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
                 Log.e("tag", "newCity ${cityAdapter.cities}")
 
-                val status = dataBaseHandler.insertData(City(cityCounter, cityTitle, cityDescription))
+                val status = dataBaseHandler.insertData(city)
 
                 if (status > -1) {
                     Toast.makeText(applicationContext, "Record saved", Toast.LENGTH_LONG).show()

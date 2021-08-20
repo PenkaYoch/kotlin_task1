@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_landmark.view.*
+import kotlinx.android.synthetic.main.activity_landmark.view.*
 
 class LandmarkAdapter(
     val landmarks: MutableList<Landmark>,

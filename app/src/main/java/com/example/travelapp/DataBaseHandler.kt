@@ -28,9 +28,9 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
 
         // Create table Cities
         val createTable = ("CREATE TABLE " + TABLE_NAME + "("
-                + COL_ID + " PRIMARY KEY AUTOINCREMENT,"
-                + COL_TITLE + " VARCHAR(256),"
-                + COL_DESCRIPTION +" PRIMARY KEY AUTOINCREMENT" + ")")
+                + COL_ID + "INTEGER PRIMARY KEY,"
+                + COL_TITLE + " TEXT,"
+                + COL_DESCRIPTION +" TEXT" + ")")
 
         db?.execSQL(createTable)
     }
@@ -44,7 +44,6 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         var cv = ContentValues()
         cv.put(COL_TITLE, city.title)
         cv.put(COL_DESCRIPTION, city.description)
-        cv.put(COL_ID, city.cityId)
         var result = db.insert(TABLE_NAME, null, cv)
 
         if (result == (-1).toLong()) {
@@ -76,11 +75,11 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
 
         if (cursor.moveToFirst()) {
             do {
+                cityId = cursor.getInt(cursor.getColumnIndex(COL_ID))
                 title = cursor.getString(cursor.getColumnIndex(COL_TITLE))
                 description = cursor.getString(cursor.getColumnIndex(COL_DESCRIPTION))
-                cityId = cursor.getInt(cursor.getColumnIndex(COL_ID))
 
-                val data = City(title = title, description = description, cityId = cityId)
+                val data = City(cityId = cityId, title = title, description = description)
                 dataList.add(data)
             } while (cursor.moveToNext())
         }
