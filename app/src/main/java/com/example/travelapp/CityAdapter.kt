@@ -45,7 +45,6 @@ class CityAdapter(
         city.cityId = cities.lastIndex + 1
         Log.e("tag", "newCity $cities")
         notifyItemInserted(cities.size - 1)
-//        notifyDataSetChanged()
     }
 
     private fun deleteCity(city: City) {
@@ -80,7 +79,9 @@ class CityAdapter(
             }
 
             btnCityLandmarks.setOnClickListener {
-                val intent = Intent(context, LandmarkActivity::class.java)
+                val intent = Intent(context, LandmarkActivity::class.java).apply {
+                    putExtra("City id", curCity.cityId)
+                }
                 context.startActivity(intent)
             }
         }

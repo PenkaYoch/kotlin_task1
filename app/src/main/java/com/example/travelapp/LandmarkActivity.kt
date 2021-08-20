@@ -1,7 +1,9 @@
 package com.example.travelapp
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,8 @@ class LandmarkActivity : AppCompatActivity() {
 
         val context = this
 
+        val id = intent.getIntExtra("City id", 0)
+
         btnAddLandmark.setOnClickListener {
                 val dialog = Dialog(context)
                 dialog.setContentView(R.layout.dialog_landmark)
@@ -35,14 +39,16 @@ class LandmarkActivity : AppCompatActivity() {
                     val landmarkTitle = dialog.findViewById<TextInputLayout>(R.id.landmark_name_input).editText?.text.toString()
                     val landmarkDescription = dialog.findViewById<TextInputLayout>(R.id.landmark_description_input).editText?.text.toString()
 
-                    val landmark = Landmark(landmarkTitle, landmarkDescription)
+                    val landmark = Landmark(landmarkTitle, landmarkDescription, id)
                     val alertDialogBuilder = AlertDialog.Builder(this)
 
                     if (!landmarkTitle.isNullOrEmpty() && !landmarkDescription.isNullOrEmpty()) {
                         landmarkAdapter.addLandmark(landmark)
+                        Log.e("tag", "newLandmark $landmark")
+                        dialog.dismiss()
 
-                        landmark_name_input.editText?.text?.clear()
-                        landmark_description_input.editText?.text?.clear()
+//                        landmark_name_input.editText?.text?.clear()
+//                        landmark_description_input.editText?.text?.clear()
                     } else {
                         alertDialogBuilder.setTitle("Insert valid data")
                         alertDialogBuilder.show()

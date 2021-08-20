@@ -8,21 +8,20 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
-//private const val DATABASE_NAME = "MyDB"
-//private const val TABLE_NAME = "Cities"
-//private const val COL_TITLE = "Title"
-//private const val COL_DESCRIPTION = "Description"
-//private const val COL_ID = "ID"
-//private const val COL_LANDMARKS = "Landmarks"
-
 class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
 
     companion object {
         private const val DATABASE_NAME = "MyDB"
+
         private const val TABLE_NAME = "Cities"
         private const val COL_ID = "ID"
         private const val COL_TITLE = "Title"
         private const val COL_DESCRIPTION = "Description"
+
+        private const val TABLE_LANDMARKS = "Landmarks"
+        private const val COL_LAND_TITLE = "Landmark title"
+        private const val COL_LAND_DESCRIPTION = "Landmark description"
+        private const val COL_LAND_ID = "Landmark ID"
     }
     override fun onCreate(db: SQLiteDatabase?) {
 
@@ -31,6 +30,14 @@ class DataBaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
                 + COL_ID + "INTEGER PRIMARY KEY,"
                 + COL_TITLE + " TEXT,"
                 + COL_DESCRIPTION +" TEXT" + ")")
+
+        db?.execSQL(createTable)
+
+        // Create table Landmarks
+        val createLandmark = ("CREATE TABLE " + TABLE_LANDMARKS + "("
+                + COL_LAND_TITLE + "TEXT,"
+                + COL_LAND_DESCRIPTION + " TEXT,"
+                + COL_LAND_ID +" INTEGER" + ")")
 
         db?.execSQL(createTable)
     }

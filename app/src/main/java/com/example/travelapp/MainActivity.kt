@@ -29,10 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         rvCities.adapter = cityAdapter
         rvCities.layoutManager = LinearLayoutManager(this)
-//        cityAdapter.onAddLandmark = { landmark ->
-//            //todo intent list
-//
-//        }
 
         val context = this
 
@@ -58,15 +54,15 @@ class MainActivity : AppCompatActivity() {
 
                 val status = dataBaseHandler.insertData(city)
 
+//                var db = DataBaseHandler(context)
+//                db.insertData(city)
+
                 if (status > -1) {
                     Toast.makeText(applicationContext, "Record saved", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(applicationContext, "Not saved", Toast.LENGTH_LONG).show()
                     Log.e("tag", "failedCity ${cityAdapter.cities}")
                 }
-
-                var db = DataBaseHandler(context)
-                db.insertData(city)
 
                 setupListOfDataIntoRecyclerView()
 
