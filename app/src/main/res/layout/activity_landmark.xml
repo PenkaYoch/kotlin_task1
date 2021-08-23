@@ -11,13 +11,18 @@
         android:id="@+id/rvLandmarks"
         android:layout_width="409dp"
         android:layout_height="729dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="17dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.110000014" />
+
+    <!--    set in group    -->
+    <!--   set constraints   -->
+
+<!--    <RelativeLayout-->
+<!--    <LinearLayout-->
 
     <TextView
         android:id="@+id/item_landmark_name"

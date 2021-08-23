@@ -1,6 +1,7 @@
 package com.example.travelapp
 
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -42,9 +43,10 @@ class CityAdapter(
 
     fun addCity(city: City) {
         cities.add(city)
-        city.cityId = cities.lastIndex + 1
+//        city.cityId = cities.lastIndex + 1
         Log.e("tag", "newCity $cities")
         notifyItemInserted(cities.size - 1)
+
     }
 
     private fun deleteCity(city: City) {
@@ -68,7 +70,7 @@ class CityAdapter(
             individualCity.text = curCity.title
             individualDescription.text = curCity.description
 
-            individualCity.setOnLongClickListener {
+            cityView.setOnLongClickListener {
                 deleteCity(cities[position])
                 Toast.makeText(contextCity, "Deleted successful", Toast.LENGTH_SHORT).show()
 

@@ -47,7 +47,9 @@ class MainActivity : AppCompatActivity() {
             val alertDialogBuilder = AlertDialog.Builder(this)
             val dataBaseHandler: DataBaseHandler = DataBaseHandler(this)
 
-            if (cityTitle.isNotEmpty() && !cityAdapter.cities.contains(city) && cityDescription.isNotEmpty()) {
+            val cityExists: List<City> = cityAdapter.cities.filter { it.title == cityTitle }
+
+            if (cityTitle.isNotEmpty() && cityExists.count() == 0  && cityDescription.isNotEmpty()) {
                 cityAdapter.addCity(city)
 
                 Log.e("tag", "newCity ${cityAdapter.cities}")

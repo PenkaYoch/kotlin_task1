@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,31 +21,41 @@ class LandmarkActivity : AppCompatActivity() {
 //    }
 
     private lateinit var landmarkAdapter: LandmarkAdapter
+    private var id: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landmark)
-        landmarkAdapter = LandmarkAdapter(mutableListOf(), this)
+
+        this.id = intent.getIntExtra("City id", 0)
+        val landmarks = getLandmarks()
+        landmarkAdapter = LandmarkAdapter(landmarks.toMutableList(), this)
         rvLandmarks.adapter = landmarkAdapter
         rvLandmarks.layoutManager = LinearLayoutManager(this)
 
-        val context = this
-
-        val id = intent.getIntExtra("City id", 0)
-
         btnAddLandmark.setOnClickListener {
-                val dialog = Dialog(context)
+                val dialog = Dialog(this)
                 dialog.setContentView(R.layout.dialog_landmark)
-                dialog.findViewById<Button>(R.id.btn_submit_landmark).setOnClickListener {
-                    val landmarkTitle = dialog.findViewById<TextInputLayout>(R.id.landmark_name_input).editText?.text.toString()
-                    val landmarkDescription = dialog.findViewById<TextInputLayout>(R.id.landmark_description_input).editText?.text.toString()
+                dialog.btn_submit_landmark.setOnClickListener {
+                    val landmarkTitle = dialog.landmark_name_input.editText?.text.toString()
+                    val landmarkDescription = dialog.landmark_description_input.editText?.text.toString()
 
-                    val landmark = Landmark(landmarkTitle, landmarkDescription, id)
+                    val landmark = Landmark(landmarkAdapter.landmarks.size, landmarkTitle, landmarkDescription, this.id)
                     val alertDialogBuilder = AlertDialog.Builder(this)
 
                     if (!landmarkTitle.isNullOrEmpty() && !landmarkDescription.isNullOrEmpty()) {
                         landmarkAdapter.addLandmark(landmark)
                         Log.e("tag", "newLandmark $landmark")
+
+                        val dataBaseHandler: DataBaseHandler = DataBaseHandler(this)
+                        val status = dataBaseHandler.insertLandmark(landmark)
+
+                        if (status > -1) {
+                            Toast.makeText(applicationContext, "Record saved", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(applicationContext, "Not saved", Toast.LENGTH_LONG).show()
+                        }
+
                         dialog.dismiss()
 
 //                        landmark_name_input.editText?.text?.clear()
@@ -56,5 +67,12 @@ class LandmarkActivity : AppCompatActivity() {
                 }
                 dialog.show()
             }
+    }
+
+    private fun getLandmarks(): List<Landmark> {
+        val dataBaseHandler: DataBaseHandler = DataBaseHandler(this)
+        val allLandmarks = dataBaseHandler.viewLandmarks()
+
+        return allLandmarks.filter { it.cityId == this.id }
     }
 }
