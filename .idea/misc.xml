@@ -10,10 +10,14 @@
         <entry key="..\:/Users/DELL/AndroidStudioProjects/TravelApp/app/src/main/res/layout/item_city.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/TravelApp/app/src/main/res/layout/item_landmark.xml" value="0.2203125" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/TravelApp/app/src/main/res/layout/landmark.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_landmark.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1923679884878543" />
+        <entry key="app/src/main/res/layout/dialog_landmark.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_city.xml" value="0.13601823708206687" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
